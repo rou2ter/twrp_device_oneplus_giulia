@@ -17,9 +17,10 @@ BUILD_BROKEN_PLUGIN_VALIDATION := soong-libaosprecovery_defaults soong-libguitwr
 
 # Architecture
 TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv9-a
+TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := kryo
+TARGET_CPU_ABI2 :=
+TARGET_CPU_VARIANT := generic
 
 # Power
 ENABLE_CPUSETS := true
@@ -42,8 +43,6 @@ TARGET_KERNEL_HEADER_ARCH     := arm64
 BOARD_KERNEL_IMAGE_NAME       := Image
 BOARD_BOOT_HEADER_VERSION     := 4
 BOARD_KERNEL_PAGESIZE         := 4096
-TARGET_KERNEL_CLANG_COMPILE   := true
-TARGET_PREBUILT_KERNEL        := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_MKBOOTIMG_ARGS          += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS          += --pagesize $(BOARD_KERNEL_PAGESIZE)
 
@@ -51,9 +50,6 @@ BOARD_MKBOOTIMG_ARGS          += --pagesize $(BOARD_KERNEL_PAGESIZE)
 BOARD_RAMDISK_USE_LZ4 := true
 
 # A/B
-BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
-
-AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
     boot \
     init_boot \
@@ -189,7 +185,7 @@ TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 TW_SCREEN_BLANK_ON_BOOT := true
-TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko goodix_ts.ko cs_press_m68.ko cs_press_f71.ko nxp-nci.ko stm_st54se_gpio.ko stm_nfc_i2c.ko"
+TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko goodix_core.ko stm_st54se_gpio.ko nxp-nci.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 #TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone19/temp" # After a few tests u can try to fix that
 TW_BACKUP_EXCLUSIONS := /data/fonts
