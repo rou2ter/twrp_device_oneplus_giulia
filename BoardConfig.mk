@@ -48,6 +48,9 @@ TARGET_KERNEL_CLANG_COMPILE   := true
 BOARD_MKBOOTIMG_ARGS          += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS          += --pagesize $(BOARD_KERNEL_PAGESIZE)
 
+# Recovery
+TARGET_OTA_ASSERT_DEVICE := PKG110,OP5D2BL1,CPH2645,OP5D3BL1,CPH2647,OP5D3BL1,CPH2691,OP5D3BL1
+
 # Ramdisk use lz4
 BOARD_RAMDISK_USE_LZ4 := true
 
@@ -105,23 +108,9 @@ BOARD_SUPER_PARTITION_SIZE := 14266433536
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 14262239232
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
-    system \
-    system_ext \
-    product \
-    vendor \
-    vendor_dlkm \
-    odm
+	system system_ext product vendor vendor_dlkm odm
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST += \
-    my_bigball \
-    my_carrier \
-    my_company \
-    my_engineering \
-    my_heytap \
-    my_manifest \
-    my_preload \
-    my_product \
-    my_region \
-    my_stock
+	my_bigball my_carrier my_company my_engineering my_heytap my_manifest my_preload my_product my_region my_stock
 
 BOARD_PARTITION_LIST := $(call to-upper, $(BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST))
 $(foreach p, $(BOARD_PARTITION_LIST), $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE := erofs))
@@ -145,8 +134,8 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
-# TWRP specific build flags
-TW_RELEASE_PRODUCT_NAME := $(subst $(space),_,$(PRODUCT_MODEL))
+#Init
+TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
 # Extras
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
