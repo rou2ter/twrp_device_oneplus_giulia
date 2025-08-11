@@ -55,7 +55,7 @@ echo $variant
                 resetprop ro.boot.hardware.revision "NA"
                 ;;
             "23867")
-            # oneplus 13 R CN (giulia)
+            # oneplus 13 R (giulia)
                 echo "Oneplus 13 R" > /config/usb_gadget/g1/strings/0x409/product
                 resetprop ro.product.device "OP5D3BL1"
                 resetprop ro.product.system.device "CPH2691"
