@@ -6,3 +6,8 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_giulia.mk
+
+COMMON_LUNCH_CHOICES := \
+    twrp_giulia-user \
+    twrp_giulia-userdebug \
+    twrp_giulia-eng
