@@ -16,9 +16,9 @@ git clone --depth=1 https://github.com//vitaliylysikov/twrp_device_oneplus_giuli
 
 ```
 export ALLOW_MISSING_DEPENDENCIES=true
-source build/envsetup.sh
-lunch twrp_giulia-ap2a-eng
-make  image
+. build/envsetup.sh
+lunch twrp_giulia-bp2a-eng
+mka recoveryimage
 ```
 
 
