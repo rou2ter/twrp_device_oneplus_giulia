@@ -5,9 +5,9 @@
 #
 
 # Shipping API level
-BOARD_SHIPPING_API_LEVEL := 34
-PRODUCT_SHIPPING_API_LEVEL := 34
-PPRODUCT_TARGET_VNDK_VERSION := 34
+BOARD_SHIPPING_API_LEVEL := 36
+PRODUCT_SHIPPING_API_LEVEL := 36
+PPRODUCT_TARGET_VNDK_VERSION := 36
 
 # Kernel
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
@@ -27,6 +27,13 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Enable Fuse Passthrough
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.fuse.passthrough.enable=true
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(DEVICE_PATH)
+
+# Touch features
+$(call soong_config_set,OPLUS_LINEAGE_TOUCH_HAL,ENABLE_GM,true)
+$(call soong_config_set,OPLUS_LINEAGE_TOUCH_HAL,ENABLE_HTPR,false)
