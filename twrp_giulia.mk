@@ -13,8 +13,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Configure virtual_ab compression.mk
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+# Enable Virtual A/B
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
+PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := zstd
+PRODUCT_VIRTUAL_AB_COW_VERSION := 3
+PRODUCT_VIRTUAL_AB_COMPRESSION_FACTOR := 65536
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
 
 # Configure emulated_storage.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
