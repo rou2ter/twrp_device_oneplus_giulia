@@ -1,10 +1,10 @@
 name: Build TWRP for OnePlus Giulia
 
 on:
-  workflow_dispatch:   # Chạy thủ công
+  workflow_dispatch:
   push:
     branches:
-      - main           # Hoặc nhánh bạn muốn build
+      - main
 
 jobs:
   build:
@@ -13,6 +13,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Free up disk space
+      run: |
+        echo "Disk trước khi dọn:"
+        df -h
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        echo "Disk sau khi dọn:"
+        df -h
 
     - name: Cài đặt dependencies
       run: |
