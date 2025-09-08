@@ -1,10 +1,10 @@
 name: Build TWRP for OnePlus Giulia
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # Chạy thủ công
   push:
     branches:
-      - main
+      - main           # Hoặc nhánh bạn muốn build
 
 jobs:
   build:
@@ -39,9 +39,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-ccache-
 
-    - name: Sync manifest
+    - name: Sync manifest (minimal)
       run: |
-        repo init --depth=1 -u https://github.com/TWRP-Test/platform_manifest_twrp_aosp.git -b twrp-16.0
+        repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
         repo sync -j$(nproc) --force-sync
 
     - name: Clone device tree
@@ -53,7 +53,7 @@ jobs:
         export CCACHE_DIR=~/.ccache
         export USE_CCACHE=1
         ccache -M 10G
-        ccache -z   # reset stats
+        ccache -z
 
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
@@ -62,7 +62,7 @@ jobs:
         make clean
         mka recoveryimage -j$(nproc)
 
-        ccache -s   # show stats
+        ccache -s
 
     - name: Upload recovery.img
       uses: actions/upload-artifact@v4
